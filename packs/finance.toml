@@ -1,0 +1,30 @@
+# Veilkit pack: finance — US banking and card-adjacent identifiers.
+version = "2026.10"
+
+[[rule]]
+id = "fin.routing_aba"
+severity = "high"
+label = "ROUTING_NUMBER"
+description = "US ABA routing transit number, checksum validated; requires a routing context word"
+pattern = '\b\d{9}\b'
+validator = "routing_aba"
+context = ["routing", "aba", "rtn", "transit"]
+require_context = true
+
+[[rule]]
+id = "fin.bank_account"
+severity = "high"
+description = "Labeled bank account number (6 to 17 digits)"
+pattern = '(?i)\b(?:account|acct|a/c)(?: number| no\.?| #)?[:# ]*\d{6,17}\b'
+
+[[rule]]
+id = "fin.card_expiry"
+severity = "medium"
+description = "Labeled card expiry month/year"
+pattern = '(?i)\b(?:exp(?:iry|iration)?(?: date)?)[:# ]*(?:0[1-9]|1[0-2])\s?/\s?(?:\d{2}|20\d{2})\b'
+
+[[rule]]
+id = "fin.cvv"
+severity = "high"
+description = "Labeled card security code"
+pattern = '(?i)\b(?:cvv2?|cvc2?|csc|security code)[:# ]*\d{3,4}\b'

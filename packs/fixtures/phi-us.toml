@@ -1,0 +1,126 @@
+version = "2026.10"
+
+[[fixture]]
+id = "phi.mrn"
+positive = ["MRN: 00912345", "medical record number 5551234"]
+negative = ["MRN policy update", "MRN: 12"]
+
+[[fixture]]
+id = "phi.npi"
+positive = ["NPI 1234567893", "National Provider Identifier: 1679576722"]
+negative = ["NPI 1234567890", "call 1234567893"]
+
+[[fixture]]
+id = "phi.dea"
+positive = ["DEA AB1234563", "prescriber FG4567890"]
+negative = ["AB1234567", "AB123456"]
+
+[[fixture]]
+id = "phi.member_id"
+positive = ["Member ID: XYZ123456", "subscriber number 884412AB"]
+negative = ["member since 2019", "policy review"]
+
+[[fixture]]
+id = "phi.icd10"
+positive = ["Dx: E11.9", "ICD-10 J45.40"]
+negative = ["Dx pending", "diagnosis unclear"]
+
+[[fixture]]
+id = "phi.portal.epic_mychart"
+positive = ["see https://mychart.uhhospitals.com/login here", "portal at https://mychart.example.org/x?a=1"]
+negative = ["https://epic.com/jobs"]
+
+[[fixture]]
+id = "phi.portal.epic_mychart_patient"
+positive = ["https://mychart.example.org/feed?mrn=12345", "https://mychart.clinic.org/v?csn=9"]
+negative = ["https://mychart.example.org/login"]
+
+[[fixture]]
+id = "phi.portal.cerner"
+positive = ["https://patient.cernerworks.com/x", "https://my.cernerhealth.com/y"]
+negative = ["https://oracle.com"]
+
+[[fixture]]
+id = "phi.portal.athenahealth"
+positive = ["https://main.athenanet.athenahealth.com/", "https://x.athenanet.athenahealth.com/y"]
+negative = ["https://athenahealth.com/jobs"]
+
+[[fixture]]
+id = "phi.portal.eclinicalworks"
+positive = ["https://mychart.eclinicalworks.com/login", "https://eclinicalworks.com/portal"]
+negative = ["https://ecw-blog.example.com"]
+
+[[fixture]]
+id = "phi.portal.nextgen"
+positive = ["https://nextgenpatientportal.com/login", "https://www.nextgenpatientportal.com/"]
+negative = ["https://nextgenhealthcare.com/"]
+
+[[fixture]]
+id = "phi.portal.followmyhealth"
+positive = ["https://www.followmyhealth.com/login", "https://followmyhealth.com"]
+negative = ["https://allscripts.com/news"]
+
+[[fixture]]
+id = "phi.portal.meditech"
+positive = ["https://patientportal.meditech.com/foo", "https://mhealth.meditech.com/"]
+negative = ["https://meditech.com/products"]
+
+[[fixture]]
+id = "phi.portal.greenway"
+positive = ["https://mygreenwayhealth.com/x", "https://www.mygreenwayhealth.com/"]
+negative = ["https://greenwayhealth.com/news"]
+
+[[fixture]]
+id = "phi.portal.advancedmd"
+positive = ["https://patient.advancedmd.com/login", "https://patient.advancedmd.com"]
+negative = ["https://www.advancedmd.com/products"]
+
+[[fixture]]
+id = "phi.portal.drchrono"
+positive = ["https://drchrono.com/patient/12345", "https://www.drchrono.com/patient/"]
+negative = ["https://drchrono.com/blog"]
+
+[[fixture]]
+id = "phi.portal.practicefusion"
+positive = ["https://patientfusion.com/login", "https://www.patientfusion.com/"]
+negative = ["https://practicefusion.com/news"]
+
+[[fixture]]
+id = "phi.portal.kareo"
+positive = ["https://patient.kareo.com/login", "https://patient.kareo.com/"]
+negative = ["https://www.kareo.com/products"]
+
+[[fixture]]
+id = "phi.portal.healow"
+positive = ["https://healow.com/login", "https://www.healow.com/apps"]
+negative = ["https://healowmarket.example.com"]
+
+[[fixture]]
+id = "phi.portal.myhealthone"
+positive = ["https://myhealthone.com/login", "https://www.myhealthone.com/"]
+negative = ["https://hcahealthcare.com"]
+
+[[fixture]]
+id = "phi.portal.kaiser"
+positive = ["https://healthy.kaiserpermanente.org/login", "https://www.kp.org/mydoctor/"]
+negative = ["https://www.kaiserpermanente.org/careers"]
+
+[[fixture]]
+id = "phi.portal.mayo"
+positive = ["https://patientonline.mayoclinic.org/login", "https://patientonline.mayoclinic.org/"]
+negative = ["https://www.mayoclinic.org/diseases"]
+
+[[fixture]]
+id = "phi.portal.clevelandclinic"
+positive = ["https://my.clevelandclinic.org/login", "https://my.clevelandclinic.org/profile"]
+negative = ["https://www.clevelandclinic.org/about"]
+
+[[fixture]]
+id = "phi.portal.commonspirit"
+positive = ["https://mymercy.org/login", "https://nv.dignityhealth.org/mychart/login"]
+negative = ["https://www.dignityhealth.org/careers"]
+
+[[fixture]]
+id = "phi.portal.generic_mrn_query"
+positive = ["https://random-hospital.example.com/portal?mrn=A0001", "https://hospital.example.com/p?patient_id=abc"]
+negative = ["https://hospital.example.com/p?utm_source=email"]

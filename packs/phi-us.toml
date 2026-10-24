@@ -1,0 +1,177 @@
+# Veilkit pack: phi-us — US protected health information identifiers and
+# patient-portal URLs (portal list from the author's earlier work, see NOTICE).
+version = "2026.10"
+
+[[rule]]
+id = "phi.mrn"
+severity = "high"
+description = "Labeled medical record number"
+pattern = '(?i)\b(?:mrn|medical record(?: number| no\.?| #)?)[:# ]*[A-Z]?\d{5,12}\b'
+
+[[rule]]
+id = "phi.npi"
+severity = "high"
+description = "US National Provider Identifier, check-digit validated; requires an NPI context word"
+pattern = '\b\d{10}\b'
+validator = "npi"
+context = ["npi", "national provider", "provider id", "provider number"]
+require_context = true
+
+[[rule]]
+id = "phi.dea"
+severity = "high"
+description = "US DEA registration number, checksum validated"
+pattern = '\b[A-HJ-PR-UX][A-Z9]\d{7}\b'
+validator = "dea"
+
+[[rule]]
+id = "phi.member_id"
+severity = "medium"
+description = "Labeled health plan member, subscriber or policy id"
+pattern = '(?i)\b(?:member|subscriber|policy|health plan|insurance)(?: id| number| no\.?| #)[:# ]*[A-Z0-9-]{6,20}\b'
+
+[[rule]]
+id = "phi.icd10"
+severity = "medium"
+description = "Labeled ICD-10 diagnosis code"
+pattern = '(?i)\b(?:icd-?10|dx|diagnosis(?: code)?)[:# ]*[A-TV-Z]\d{2}(?:\.\d{1,4})?\b'
+
+[[rule]]
+id = "phi.portal.epic_mychart"
+severity = "medium"
+label = "PORTAL_URL"
+description = "Epic MyChart portal URL"
+pattern = '(?i)https?://[a-z0-9.-]*mychart\.[a-z]+(/[^\s]*)?'
+
+[[rule]]
+id = "phi.portal.epic_mychart_patient"
+severity = "high"
+label = "PORTAL_URL"
+description = "Epic MyChart URL carrying a patient identifier in the query"
+pattern = '(?i)https?://[a-z0-9.-]*mychart\.[a-z0-9.-]+/[^\s]*[?&](mrn|patientid|csn)=[^\s]*'
+
+[[rule]]
+id = "phi.portal.cerner"
+severity = "medium"
+label = "PORTAL_URL"
+description = "Cerner portal URL"
+pattern = '(?i)https?://[a-z0-9.-]*\.(cernerworks|cernerhealth)\.com(/[^\s]*)?'
+
+[[rule]]
+id = "phi.portal.athenahealth"
+severity = "medium"
+label = "PORTAL_URL"
+description = "athenahealth athenaNet URL"
+pattern = '(?i)https?://[a-z0-9.-]*athenanet\.athenahealth\.com(/[^\s]*)?'
+
+[[rule]]
+id = "phi.portal.eclinicalworks"
+severity = "medium"
+label = "PORTAL_URL"
+description = "eClinicalWorks portal URL"
+pattern = '(?i)https?://(mychart\.eclinicalworks|eclinicalworks)\.com(/[^\s]*)?'
+
+[[rule]]
+id = "phi.portal.nextgen"
+severity = "medium"
+label = "PORTAL_URL"
+description = "NextGen patient portal URL"
+pattern = '(?i)https?://[a-z0-9.-]*nextgenpatientportal\.com(/[^\s]*)?'
+
+[[rule]]
+id = "phi.portal.followmyhealth"
+severity = "medium"
+label = "PORTAL_URL"
+description = "Allscripts FollowMyHealth URL"
+pattern = '(?i)https?://[a-z0-9.-]*followmyhealth\.com(/[^\s]*)?'
+
+[[rule]]
+id = "phi.portal.meditech"
+severity = "medium"
+label = "PORTAL_URL"
+description = "MEDITECH patient portal URL"
+pattern = '(?i)https?://(patientportal|mhealth)\.meditech\.com(/[^\s]*)?'
+
+[[rule]]
+id = "phi.portal.greenway"
+severity = "medium"
+label = "PORTAL_URL"
+description = "Greenway Health portal URL"
+pattern = '(?i)https?://[a-z0-9.-]*mygreenwayhealth\.com(/[^\s]*)?'
+
+[[rule]]
+id = "phi.portal.advancedmd"
+severity = "medium"
+label = "PORTAL_URL"
+description = "AdvancedMD patient portal URL"
+pattern = '(?i)https?://patient\.advancedmd\.com(/[^\s]*)?'
+
+[[rule]]
+id = "phi.portal.drchrono"
+severity = "medium"
+label = "PORTAL_URL"
+description = "DrChrono patient URL"
+pattern = '(?i)https?://[a-z0-9.-]*drchrono\.com/patient(/[^\s]*)?'
+
+[[rule]]
+id = "phi.portal.practicefusion"
+severity = "medium"
+label = "PORTAL_URL"
+description = "Practice Fusion patient portal URL"
+pattern = '(?i)https?://[a-z0-9.-]*patientfusion\.com(/[^\s]*)?'
+
+[[rule]]
+id = "phi.portal.kareo"
+severity = "medium"
+label = "PORTAL_URL"
+description = "Kareo patient portal URL"
+pattern = '(?i)https?://patient\.kareo\.com(/[^\s]*)?'
+
+[[rule]]
+id = "phi.portal.healow"
+severity = "medium"
+label = "PORTAL_URL"
+description = "healow portal URL"
+pattern = '(?i)https?://[a-z0-9.-]*healow\.com(/[^\s]*)?'
+
+[[rule]]
+id = "phi.portal.myhealthone"
+severity = "medium"
+label = "PORTAL_URL"
+description = "HCA MyHealthONE URL"
+pattern = '(?i)https?://[a-z0-9.-]*myhealthone\.com(/[^\s]*)?'
+
+[[rule]]
+id = "phi.portal.kaiser"
+severity = "medium"
+label = "PORTAL_URL"
+description = "Kaiser Permanente member portal URL"
+pattern = '(?i)https?://(healthy\.kaiserpermanente\.org|[a-z0-9.-]*kp\.org/mydoctor)(/[^\s]*)?'
+
+[[rule]]
+id = "phi.portal.mayo"
+severity = "medium"
+label = "PORTAL_URL"
+description = "Mayo Clinic Patient Online Services URL"
+pattern = '(?i)https?://patientonline\.mayoclinic\.org(/[^\s]*)?'
+
+[[rule]]
+id = "phi.portal.clevelandclinic"
+severity = "medium"
+label = "PORTAL_URL"
+description = "Cleveland Clinic MyChart URL"
+pattern = '(?i)https?://my\.clevelandclinic\.org(/[^\s]*)?'
+
+[[rule]]
+id = "phi.portal.commonspirit"
+severity = "medium"
+label = "PORTAL_URL"
+description = "CommonSpirit (Mercy, Dignity Health) portal URL"
+pattern = '(?i)https?://([a-z0-9.-]*mymercy\.org|[a-z0-9.-]*dignityhealth\.org/mychart)(/[^\s]*)?'
+
+[[rule]]
+id = "phi.portal.generic_mrn_query"
+severity = "high"
+label = "PORTAL_URL"
+description = "Any URL whose query names a patient identifier (mrn, patientid, csn, patient_id)"
+pattern = '(?i)https?://[^\s]*[?&](mrn|patientid|csn|patient_id|patientmrn)=[^\s]+'

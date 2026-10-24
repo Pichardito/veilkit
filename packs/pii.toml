@@ -1,0 +1,89 @@
+# Veilkit pack: pii — general personal identifiers.
+# Regexes are RE2-compatible (no lookaround, no backreferences).
+version = "2026.10"
+
+[[rule]]
+id = "pii.email"
+severity = "medium"
+description = "Email address"
+pattern = '(?i)\b[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}\b'
+
+[[rule]]
+id = "pii.phone_us"
+severity = "medium"
+label = "PHONE"
+description = "North American phone number, with or without +1 and separators"
+pattern = '\b(?:\+?1[-. ]?)?\(?[2-9]\d{2}\)?[-. ]?\d{3}[-. ]?\d{4}\b'
+
+[[rule]]
+id = "pii.phone_e164"
+severity = "medium"
+label = "PHONE"
+description = "International phone in E.164 form (+ and 8 to 15 digits)"
+pattern = '\+[1-9]\d{7,14}\b'
+
+[[rule]]
+id = "pii.ipv4"
+severity = "low"
+description = "IPv4 address"
+pattern = '\b(?:(?:25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)\.){3}(?:25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)\b'
+
+[[rule]]
+id = "pii.ipv6"
+severity = "low"
+description = "IPv6 address in full eight-group form (compressed forms are not matched)"
+pattern = '\b(?:[0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}\b'
+
+[[rule]]
+id = "pii.credit_card"
+severity = "high"
+description = "Payment card number, 13 to 19 digits with optional spaces or dashes, Luhn-validated"
+pattern = '\b(?:\d[ -]?){12,18}\d\b'
+validator = "luhn"
+context = ["card", "visa", "mastercard", "amex", "credit"]
+
+[[rule]]
+id = "pii.iban"
+severity = "high"
+description = "International Bank Account Number, mod-97 validated"
+pattern = '\b[A-Z]{2}\d{2}[A-Z0-9]{11,30}\b'
+validator = "iban_mod97"
+
+[[rule]]
+id = "pii.ssn"
+severity = "high"
+description = "US Social Security Number in 3-2-4 form, structurally validated"
+pattern = '\b\d{3}-\d{2}-\d{4}\b'
+validator = "ssn"
+context = ["ssn", "social security"]
+
+[[rule]]
+id = "pii.ssn_unformatted"
+severity = "high"
+label = "SSN"
+description = "US SSN as nine contiguous digits; requires an SSN context word nearby"
+pattern = '\b\d{9}\b'
+validator = "ssn"
+context = ["ssn", "social security"]
+require_context = true
+
+[[rule]]
+id = "pii.passport_us"
+severity = "medium"
+label = "PASSPORT"
+description = "Labeled passport number (letter optional, 8 or 9 digits)"
+pattern = '(?i)\bpassport(?: no\.?| number| #)?[:# ]*[A-Z]?\d{8,9}\b'
+
+[[rule]]
+id = "pii.dob"
+severity = "high"
+label = "DOB"
+description = "Labeled date of birth, numeric formats"
+pattern = '(?i)\b(?:dob|date of birth|birth ?date|born(?: on)?)[:# ]*(?:\d{1,2}[/.-]\d{1,2}[/.-]\d{2,4}|\d{4}-\d{2}-\d{2})\b'
+
+[[rule]]
+id = "pii.street_address"
+severity = "medium"
+label = "ADDRESS"
+description = "Street address: number, one to four words, a street suffix (conservative)"
+pattern = '''\b\d{1,6}\s+(?:[A-Za-z0-9.'-]+\s+){1,4}(?i:street|st|avenue|ave|road|rd|boulevard|blvd|lane|ln|drive|dr|court|ct|way|place|pl|terrace|ter|circle|cir)\b'''

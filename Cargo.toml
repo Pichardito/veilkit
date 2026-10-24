@@ -1,0 +1,32 @@
+[workspace]
+resolver = "2"
+members = ["crates/veilkit-core", "crates/veilkit-wasm", "crates/veilkit-cli"]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.85"
+license = "Apache-2.0"
+authors = ["Carlos Pichardo"]
+repository = "https://github.com/Pichardito/veilkit"
+
+[workspace.dependencies]
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+thiserror = "2"
+toml = "0.8"
+regex = { version = "1.11", default-features = false, features = ["std", "unicode-case", "unicode-perl", "perf-cache", "perf-dfa", "perf-onepass", "perf-backtrack", "perf-inline", "perf-literal"] }
+
+[profile.release]
+opt-level = 3
+lto = "thin"
+codegen-units = 1
+strip = "symbols"
+
+# Used by wasm-pack via `--profile`? wasm-pack uses `release`; we keep a
+# dedicated profile for size-oriented native experiments and set the wasm
+# panic strategy per target in crates/veilkit-wasm/.cargo/config.toml.
+[profile.wasm]
+inherits = "release"
+opt-level = "s"
+panic = "abort"

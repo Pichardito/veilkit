@@ -1,0 +1,61 @@
+{
+  "name": "veilkit",
+  "version": "0.1.0",
+  "description": "Fast, validated PII / PHI / secret redaction in WebAssembly. Pattern + checksum, not ML.",
+  "license": "Apache-2.0",
+  "author": "Carlos Pichardo",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Pichardito/veilkit.git",
+    "directory": "npm"
+  },
+  "homepage": "https://github.com/Pichardito/veilkit#readme",
+  "keywords": [
+    "pii",
+    "phi",
+    "redaction",
+    "secrets",
+    "dlp",
+    "wasm",
+    "llm"
+  ],
+  "type": "module",
+  "private": false,
+  "sideEffects": false,
+  "main": "./dist/node.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "node": "./dist/node.js",
+      "default": "./dist/index.js"
+    },
+    "./node": {
+      "types": "./dist/node.d.ts",
+      "default": "./dist/node.js"
+    },
+    "./bundler": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "pkg/node",
+    "pkg/bundler",
+    "README.md"
+  ],
+  "scripts": {
+    "build:wasm": "cd ../crates/veilkit-wasm && wasm-pack build --release --target nodejs --out-dir ../../npm/pkg/node --out-name veilkit && wasm-pack build --release --target bundler --out-dir ../../npm/pkg/bundler --out-name veilkit && rm -f ../../npm/pkg/node/.gitignore ../../npm/pkg/bundler/.gitignore",
+    "build:ts": "tsc -p tsconfig.json",
+    "build": "npm run build:wasm && npm run build:ts",
+    "test": "node --test test/node.test.mjs",
+    "pack:dry": "npm pack --dry-run"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.0"
+  }
+}

@@ -1,0 +1,10 @@
+/target
+**/target
+Cargo.lock.bak
+npm/node_modules
+npm/pkg
+npm/dist
+npm/*.tgz
+*.wasm
+!docs/**/*.wasm
+.DS_Store

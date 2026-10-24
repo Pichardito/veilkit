@@ -1,0 +1,23 @@
+[package]
+name = "veilkit-cli"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+authors.workspace = true
+repository.workspace = true
+description = "Command-line scanner and redactor over veilkit-core"
+
+[[bin]]
+name = "veilkit"
+path = "src/main.rs"
+
+[dependencies]
+veilkit-core = { path = "../veilkit-core" }
+clap = { version = "4", features = ["derive"] }
+serde_json = { workspace = true }
+anyhow = "1"
+
+[dev-dependencies]
+assert_cmd = "2"
+predicates = "3"

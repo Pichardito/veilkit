@@ -1,0 +1,61 @@
+version = "2026.10"
+
+[[fixture]]
+id = "pii.email"
+positive = ["contact me at jane.doe@example.com today", "x@y.io"]
+negative = ["jane at example dot com"]
+
+[[fixture]]
+id = "pii.phone_us"
+positive = ["call (415) 555-0199 now", "+1 212-555-0123", "415.555.0199"]
+negative = ["order 123456", "123-45-6789"]
+
+[[fixture]]
+id = "pii.phone_e164"
+positive = ["+442071838750", "+5215512345678"]
+negative = ["+1", "+0123456789"]
+
+[[fixture]]
+id = "pii.ipv4"
+positive = ["host 10.0.0.1 is up", "192.168.1.254"]
+negative = ["version 1.2.3", "999.1.1.1"]
+
+[[fixture]]
+id = "pii.ipv6"
+positive = ["2001:0db8:85a3:0000:0000:8a2e:0370:7334", "fe80:0000:0000:0000:0202:b3ff:fe1e:8329"]
+negative = ["::1", "2001:db8::1"]
+
+[[fixture]]
+id = "pii.credit_card"
+positive = ["card 4111 1111 1111 1111 on file", "5500000000000004", "378282246310005"]
+negative = ["4111 1111 1111 1112", "1234 5678 9012 3456"]
+
+[[fixture]]
+id = "pii.iban"
+positive = ["GB82WEST12345698765432", "pay to DE89370400440532013000 please"]
+negative = ["GB82WEST12345698765433", "GB82 is a postcode"]
+
+[[fixture]]
+id = "pii.ssn"
+positive = ["SSN 123-45-6789", "219-09-9999"]
+negative = ["000-12-3456", "666-12-3456", "123-00-4567", "900-12-3456"]
+
+[[fixture]]
+id = "pii.ssn_unformatted"
+positive = ["SSN 123456789", "social security no 219099999"]
+negative = ["order 123456789", "SSN 000123456"]
+
+[[fixture]]
+id = "pii.passport_us"
+positive = ["Passport No: C12345678", "PASSPORT # 987654321"]
+negative = ["passport photo 12", "passport expires 2030"]
+
+[[fixture]]
+id = "pii.dob"
+positive = ["DOB: 04/12/1985", "date of birth 1985-04-12", "born on 4.12.85"]
+negative = ["due 04/12/1985", "DOB unknown"]
+
+[[fixture]]
+id = "pii.street_address"
+positive = ["ship to 123 Main Street", "4567 W Sunset Blvd", "1 Infinite Loop Dr"]
+negative = ["5 apples per day", "chapter 12 of the book"]

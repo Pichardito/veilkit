@@ -1,0 +1,5 @@
+target
+npm/node_modules
+npm/pkg
+npm/dist
+.git

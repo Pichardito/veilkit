@@ -1,0 +1,4 @@
+# wasm-pack builds with `--release`; make that profile abort on panic for the
+# wasm target so a bug can never unwind across the JS boundary.
+[target.wasm32-unknown-unknown]
+rustflags = ["-C", "panic=abort", "-C", "opt-level=z"]

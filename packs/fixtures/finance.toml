@@ -1,0 +1,21 @@
+version = "2026.10"
+
+[[fixture]]
+id = "fin.routing_aba"
+positive = ["routing number 021000021", "ABA: 011000015"]
+negative = ["routing number 021000022", "invoice 021000021"]
+
+[[fixture]]
+id = "fin.bank_account"
+positive = ["Account number: 000123456789", "acct # 98765432"]
+negative = ["account manager 2", "account 2024"]
+
+[[fixture]]
+id = "fin.card_expiry"
+positive = ["exp 09/27", "Expiration date: 12/2028"]
+negative = ["exp 13/27", "expiry soon"]
+
+[[fixture]]
+id = "fin.cvv"
+positive = ["CVV: 123", "security code 4321"]
+negative = ["cvv policy", "CVV: 12"]

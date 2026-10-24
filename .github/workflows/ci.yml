@@ -1,0 +1,56 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  rust:
+    name: fmt, clippy, test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: 1.97.1
+          components: rustfmt, clippy
+          targets: wasm32-unknown-unknown
+      - uses: Swatinem/rust-cache@v2
+      - run: cargo fmt --all -- --check
+      - run: cargo clippy --workspace --all-targets -- -D warnings
+      - run: cargo test --workspace
+
+  wasm-npm:
+    name: wasm-pack build + node tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: 1.97.1
+          targets: wasm32-unknown-unknown
+      - uses: Swatinem/rust-cache@v2
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install wasm-pack
+        run: curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
+      - name: Build wasm (node + bundler)
+        working-directory: npm
+        run: npm run build:wasm
+      - name: Enforce wasm size budget (400 KiB gzipped)
+        run: |
+          size=$(gzip -9 -c npm/pkg/node/veilkit_bg.wasm | wc -c)
+          echo "gzipped wasm: $size bytes"
+          test "$size" -le 409600
+      - name: Node wrapper build + tests
+        working-directory: npm
+        run: |
+          npm ci
+          npm run build:ts
+          npm test
+          npm pack --dry-run
